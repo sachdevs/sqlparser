@@ -9,6 +9,11 @@
 
 #include <boost/container/vector.hpp>
 
+/*
+ * Token:
+ *      first->name: refers to name of token. I.e DOT for '.' token.
+ *      second->value/word: actual value for token. I.e '.' for DOT token.
+ */
 typedef std::pair<std::string, std::string> Token;
 
 class Lexer {
@@ -20,6 +25,34 @@ private:
     boost::container::vector<Token> tokens;
     std::string input;
     std::string chunk;
+
+    // keyword vectors
+    const std::vector<std::string> SQL_FUNCTIONS{"AVG", "COUNT", "MIN", "MAX", "SUM"};
+    const std::vector<std::string> SQL_SORT_ORDERS{"ASC", "DESC"};
+    const std::vector<std::string> SQL_OPERATORS{"=", "!=", ">=", ">", "<=", "<>", "<", "LIKE", "IS NOT", "IS"};
+    const std::vector<std::string> SUB_SELECT_OP{"IN", "NOT IN", "ANY", "ALL", "SOME"};
+    const std::vector<std::string> SUB_SELECT_UNARY_OP{"EXISTS"};
+    const std::vector<std::string> SQL_CONDITIONALS{"AND", "OR"};
+    const std::vector<std::string> SQL_BETWEENS{"BETWEEN", "NOT BETWEEN"};
+    const std::vector<std::string> BOOLEAN{"TRUE", "FALSE", "NULL"};
+    const std::vector<std::string> MATH{"+", "-"};
+    const std::vector<std::string> MATH_MULTI{"/", "*"};
+
+    // regex based matching
+//    STAR
+//    SEPARATOR
+//    WHITESPACE
+//    LITERAL
+//    PARAMETER
+//    NUMBER
+//    STRING
+//    DBLSTRING
+
+
+    int tokenizeFromWord(const std::string name);
+    int tokenizeFromWord(const std::string name, std::string word);
+    // implement tokenizeFromRegex int tokenizeFromRegex
+    int tokenizeFromList(const std::string name, const std::vector<std::string> list);
 };
 
 
