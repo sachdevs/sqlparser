@@ -40,7 +40,6 @@ boost::container::vector<Token> Lexer::getTokens() {
  * @return
  */
 int Lexer::tokenizeFromWord(const std::string name, std::string word = name) {
-    word = "123";
     return 0;
 }
 
@@ -54,47 +53,76 @@ int Lexer::tokenizeFromList(const std::string name, const std::vector<std::strin
     return 0;
 }
 
+/**
+ * Tokenize functions
+ */
+
 int Lexer::keywordToken() {
-    return 0;
+    return tokenizeFromWord("SELECT") ||
+           tokenizeFromWord("DISTINCT") ||
+           tokenizeFromWord("FROM") ||
+           tokenizeFromWord("WHERE") ||
+           tokenizeFromWord("GROUP") ||
+           tokenizeFromWord("ORDER") ||
+           tokenizeFromWord("BY") ||
+           tokenizeFromWord("HAVING") ||
+           tokenizeFromWord("LIMIT") ||
+           tokenizeFromWord("JOIN") ||
+           tokenizeFromWord("LEFT") ||
+           tokenizeFromWord("RIGHT") ||
+           tokenizeFromWord("INNER") ||
+           tokenizeFromWord("OUTER") ||
+           tokenizeFromWord("ON") ||
+           tokenizeFromWord("AS") ||
+           tokenizeFromWord("UNION") ||
+           tokenizeFromWord("ALL") ||
+           tokenizeFromWord("LIMIT") ||
+           tokenizeFromWord("OFFSET") ||
+           tokenizeFromWord("FETCH") ||
+           tokenizeFromWord("ROW") ||
+           tokenizeFromWord("ROWS") ||
+           tokenizeFromWord("ONLY") ||
+           tokenizeFromWord("NEXT") ||
+           tokenizeFromWord("FIRST");
 }
 
 int Lexer::dotToken() {
-    return 0;
+    return tokenizeFromWord("DOT", ".");
 }
 
 int Lexer::operatorToken() {
-    return 0;
+    return tokenizeFromList("OPERATOR", SQL_OPERATORS);
 }
 
 int Lexer::mathToken() {
-    return 0;
+    return tokenizeFromList("MATH", MATH) || tokenizeFromList("MATH_MULTI", MATH_MULTI);
 }
 
 int Lexer::conditionalToken() {
-    return 0;
+    return tokenizeFromList("CONDITIONAL", SQL_CONDITIONALS);
 }
 
 int Lexer::betweendToken() {
-    return 0;
+    return tokenizeFromList("BETWEEN", SQL_BETWEENS);
 }
 
 int Lexer::subSelectOpToken() {
-    return 0;
+    return tokenizeFromList("SUB_SELECT_OP", SUB_SELECT_OP);
 }
 
 int Lexer::subSelectUnaryOpToken() {
-    return 0;
+    return tokenizeFromList("SUB_SELECT_UNARY_OP", SUB_SELECT_UNARY_OP);
 }
 
 int Lexer::functionToken() {
-    return 0;
+    return tokenizeFromList("FUNCTION", SQL_FUNCTIONS);
 }
 
 int Lexer::sortOrderToken() {
-    return 0;
+    return tokenizeFromList("DIRECTION", SQL_SORT_ORDERS);
 }
 
 int Lexer::booleanToken() {
-    return 0;
+    return tokenizeFromList("BOOLEAN", BOOLEAN);
 }
 
