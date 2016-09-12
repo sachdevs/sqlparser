@@ -49,10 +49,26 @@ private:
 //    DBLSTRING
 
 
-    int tokenizeFromWord(const std::string name);
+//    int tokenizeFromWord(const std::string name);
     int tokenizeFromWord(const std::string name, std::string word);
-    // implement tokenizeFromRegex int tokenizeFromRegex
+    // TODO implement tokenizeFromRegex int tokenizeFromRegex(...)
     int tokenizeFromList(const std::string name, const std::vector<std::string> list);
+
+    // matching functions
+    int keywordToken();
+    int dotToken();
+    int operatorToken();
+    int mathToken();
+    int conditionalToken();
+    int betweendToken();
+    int subSelectOpToken();
+    int subSelectUnaryOpToken();
+    int functionToken();
+    int sortOrderToken();
+    int booleanToken();
+
+    // regex matching functions TODO
+
 };
 
 
