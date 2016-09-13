@@ -26,6 +26,8 @@ private:
     std::string input;
     std::string chunk;
 
+    void addToken(const Token t);
+
     // keyword vectors
     const std::vector<std::string> SQL_FUNCTIONS{"AVG", "COUNT", "MIN", "MAX", "SUM"};
     const std::vector<std::string> SQL_SORT_ORDERS{"ASC", "DESC"};

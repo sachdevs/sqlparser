@@ -10,8 +10,9 @@
 using namespace std;
 
 namespace {
+    // TODO implement
     string regexEscape(string word) {
-        return "";
+        return word;
     }
 }
 
@@ -40,7 +41,20 @@ boost::container::vector<Token> Lexer::getTokens() {
  * @return
  */
 int Lexer::tokenizeFromWord(const std::string name, std::string word = name) {
-    return 0;
+    word = regexEscape(word);
+//    matcher = /^\w+$/.test(word) ? new RegExp("^(" + word + ")\\b", 'ig') : new RegExp("^(" + word + ")", 'ig');
+//    match = matcher.exec(this.chunk);
+//    if (!match) {
+//        return 0;
+//    }
+//    this.token(name, match[1]);
+//    return match[1].length;
+
+    if (word != chunk) {
+        return 0;
+    }
+    this->addToken(Token(name, chunk));
+    return word.length();
 }
 
 /**
@@ -50,7 +64,11 @@ int Lexer::tokenizeFromWord(const std::string name, std::string word = name) {
  * @return
  */
 int Lexer::tokenizeFromList(const std::string name, const std::vector<std::string> list) {
-    return 0;
+    int ret = 0;
+    for (auto it = list.begin(); it < list.end() || ret == 0; it++) {
+        ret = tokenizeFromWord(name, *it);
+    }
+    return ret;
 }
 
 /**
@@ -124,5 +142,9 @@ int Lexer::sortOrderToken() {
 
 int Lexer::booleanToken() {
     return tokenizeFromList("BOOLEAN", BOOLEAN);
+}
+
+void Lexer::addToken(const Token t) {
+    tokens.push_back(t);
 }
 
