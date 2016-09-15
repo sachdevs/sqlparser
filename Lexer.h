@@ -8,6 +8,7 @@
 #include <string>
 
 #include <boost/container/vector.hpp>
+#include <regex>
 
 /*
  * Token:
@@ -53,7 +54,8 @@ private:
 
 //    int tokenizeFromWord(const std::string name);
     int tokenizeFromWord(const std::string name, std::string word);
-    // TODO implement tokenizeFromRegex int tokenizeFromRegex(...)
+    // TODO implement
+    int tokenizeFromRegex(const std::string name, std::regex reg, int part = 0, int lengthPart = part, bool output = true);
     int tokenizeFromList(const std::string name, const std::vector<std::string> list);
 
     // matching functions

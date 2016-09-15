@@ -35,6 +35,23 @@ boost::container::vector<Token> Lexer::getTokens() {
  */
 
 /**
+ * Tokenizer for regex based matching
+ * @param name
+ * @param reg
+ * @param part
+ * @param lengthPart
+ * @param output
+ * @return
+ */
+int Lexer::tokenizeFromRegex(const std::string name, std::regex reg, int part, int lengthPart, bool output) {
+    if (!regex_search(name, reg)) {
+        return 0;
+    }
+    
+    return 0;
+}
+
+/**
  * actual word tokenizer. Does a regex match on the keyword against current chunk being observed
  * @param name of token to tokenize
  * @param word actual token
@@ -42,19 +59,25 @@ boost::container::vector<Token> Lexer::getTokens() {
  */
 int Lexer::tokenizeFromWord(const std::string name, std::string word = name) {
     word = regexEscape(word);
-//    matcher = /^\w+$/.test(word) ? new RegExp("^(" + word + ")\\b", 'ig') : new RegExp("^(" + word + ")", 'ig');
-//    match = matcher.exec(this.chunk);
-//    if (!match) {
-//        return 0;
-//    }
-//    this.token(name, match[1]);
-//    return match[1].length;
 
-    if (word != chunk) {
+    regex wordMatcher("^\w+$");
+    regex matcher;
+
+//    if (regex_search(word, wordMatcher)) {
+//        matcher = regex("^(" + word + ")\\b", regex::icase);
+//    } else {
+//        matcher = regex("^(" + word + ")", regex::icase);
+//    }
+
+    matcher = regex_search(word, wordMatcher) ? regex("^(" + word + ")\\b", regex::icase) : regex("^(" + word + ")", regex::icase);
+
+    bool match = regex_search(chunk, matcher);
+
+    if (!match) {
         return 0;
     }
     this->addToken(Token(name, chunk));
-    return word.length();
+    return (int)word.length();
 }
 
 /**
